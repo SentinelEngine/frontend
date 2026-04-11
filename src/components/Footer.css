@@ -1,3 +1,5 @@
 /* FOOTER */
 .footer { padding: 1.5rem 2.5rem; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(240, 250, 246, 0.3); }
+.footer-logo-hover { transition: transform 0.2s ease; cursor: pointer; }
+.footer-logo-hover:hover { transform: scale(1.1) rotate(-5deg); }
 .footer-links { display: flex; gap: 1.5rem; }

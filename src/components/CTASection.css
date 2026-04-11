@@ -5,3 +5,11 @@
 .cta-section h2 span { color: var(--teal); }
 .cta-sub { font-size: 16px; color: var(--muted); margin-bottom: 2.5rem; }
 .cta-btns { display: flex; gap: 12px; justify-content: center; }
+
+.sweep-text {
+  background: linear-gradient(90deg, var(--teal) 50%, var(--text) 50%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

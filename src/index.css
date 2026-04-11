@@ -5,6 +5,7 @@
   --text: #f0faf6; --muted: rgba(240,250,246,0.5); --faint: rgba(240,250,246,0.15);
   --border: rgba(29,158,117,0.18); --mono: 'Courier New', monospace;
 }
+html { scroll-behavior: smooth; }
 body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
 /* Keep global utility classes out of component CSS if needed, but App wrapper is fine */

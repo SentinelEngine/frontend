@@ -2,18 +2,22 @@
 .hero { padding: 7rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
 .hero-dots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(29,158,117,0.12) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
 .hero-glow { position: absolute; top: 30%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(29,158,117,0.08) 0%, transparent 70%); pointer-events: none; }
-.badge { display: inline-flex; align-items: center; gap: 6px; border: 0.5px solid rgba(29,158,117,0.4); color: var(--teal-bright); font-size: 11px; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2rem; position: relative; }
+.badge { display: inline-flex; align-items: center; gap: 6px; border: 0.5px solid rgba(29,158,117,0.4); color: var(--teal-bright); font-size: 11px; padding: 5px 14px; border-radius: 20px; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 2rem; position: relative; z-index: 1; }
 .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 .hero h1 { font-size: clamp(42px, 7vw, 80px); font-weight: 700; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem; position: relative; }
 .hero h1 em { font-style: italic; color: var(--teal); font-weight: 300; }
 .hero-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto 2.5rem; }
-.hero-btns { display: flex; gap: 12px; justify-content: center; margin-bottom: 4rem; }
-.btn-t { background: var(--teal); color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; margin-bottom: 4rem; position: relative; z-index: 1; }
+.btn-t { background: var(--teal); color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; position: relative; overflow: hidden; }
+.btn-t::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(20deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%); transform: translateX(-100%); transition: transform 0.5s ease; }
+.btn-t:hover::after { transform: translateX(200%); }
 .btn-g { background: transparent; color: var(--teal-bright); border: 0.5px solid rgba(29,158,117,0.4); padding: 12px 28px; border-radius: 8px; font-size: 14px; cursor: pointer; }
+.btn-g .arrow { display: inline-block; transition: transform 0.2s ease; }
+.btn-g:hover .arrow { transform: translateX(4px); }
 
 /* EDITOR MOCKUP */
-.editor-wrap { position: relative; max-width: 780px; margin: 0 auto; }
+.editor-wrap { position: relative; max-width: 780px; margin: 0 auto; z-index: 1; }
 .editor-tilt { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 12px; overflow: hidden; transform: perspective(1200px) rotateX(4deg); transform-origin: bottom center; }
 .e-bar { background: #090f0b; padding: 10px 16px; display: flex; align-items: center; gap: 6px; border-bottom: 0.5px solid var(--border); }
 .e-dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -33,3 +37,14 @@
 .cb-lo { background: rgba(29,158,117,0.12); color: var(--teal-bright); border: 0.5px solid rgba(29,158,117,0.28); }
 .cb-md { background: rgba(245,158,11,0.12); color: #fcd34d; border: 0.5px solid rgba(245,158,11,0.28); }
 .sbar { background: var(--teal); padding: 4px 16px; display: flex; gap: 16px; font-size: 11px; color: rgba(255,255,255,0.88); }
+.cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+@media (max-width: 768px) {
+  .hero { padding: 6rem 1rem 3rem; }
+  .hero h1 { font-size: clamp(36px, 10vw, 42px); }
+  .editor-wrap { margin-top: 2rem; }
+  .editor-tilt { transform: none; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+  .code { font-size: 11px; padding: 1rem 0; }
+  .sbar { flex-wrap: wrap; gap: 8px; justify-content: center; }
+}
