@@ -17,11 +17,11 @@ const ParticleCanvas = () => {
     const init = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      particles = Array.from({ length: 25 }, () => ({
+      particles = Array.from({ length: 140 }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1,
-        speedY: Math.random() * 0.5 + 0.1,
+        size: Math.random() * 3 + 1,
+        speedY: Math.random() * 0.8 + 0.2,
         opacity: Math.random() * 0.5 + 0.15
       }));
     };
@@ -49,6 +49,92 @@ const ParticleCanvas = () => {
 
     return () => {
       window.removeEventListener('resize', init);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0, display: window.innerWidth < 768 ? 'none' : 'block' }} />;
+};
+
+const MagneticGridCanvas = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
+
+  useEffect(() => {
+    if (window.innerWidth < 768) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const spacing = 32;
+    let dots: { ox: number, oy: number, x: number, y: number }[] = [];
+
+    const init = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      dots = [];
+      for (let x = 0; x < canvas.width + spacing; x += spacing) {
+        for (let y = 0; y < canvas.height + spacing; y += spacing) {
+          dots.push({ ox: x, oy: y, x: x, y: y });
+        }
+      }
+    };
+    init();
+    window.addEventListener('resize', init);
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    };
+
+    const onMouseLeave = () => {
+      mouseRef.current = { x: -1000, y: -1000 };
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    document.body.addEventListener('mouseleave', onMouseLeave);
+
+    let animationId: number;
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(29, 158, 117, 0.4)';
+
+      const { x: mx, y: my } = mouseRef.current;
+      const radius = 120;
+
+      dots.forEach(dot => {
+        const dx = dot.ox - mx;
+        const dy = dot.oy - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < radius) {
+          const force = (radius - dist) / radius;
+          const pullX = (dx / dist) * force * 15;
+          const pullY = (dy / dist) * force * 15;
+          dot.x = dot.ox - pullX;
+          dot.y = dot.oy - pullY;
+        } else {
+          dot.x += (dot.ox - dot.x) * 0.1;
+          dot.y += (dot.oy - dot.y) * 0.1;
+        }
+
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, 1.1, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      animationId = requestAnimationFrame(render);
+    };
+    render();
+
+    return () => {
+      window.removeEventListener('resize', init);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.body.removeEventListener('mouseleave', onMouseLeave);
       cancelAnimationFrame(animationId);
     };
   }, []);
@@ -164,7 +250,8 @@ const Hero: React.FC = () => {
 
   return (
     <section className="hero">
-      <div className="hero-dots"></div>
+      <div className="hero-dots" style={window.innerWidth >= 768 ? { display: 'none' } : {}}></div>
+      <MagneticGridCanvas />
       <div className="hero-glow"></div>
       <ParticleCanvas />
 

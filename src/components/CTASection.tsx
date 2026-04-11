@@ -12,7 +12,7 @@ const CTASection: React.FC = () => {
   const words = text.split(' ');
 
   const handleConfetti = () => {
-    confetti({ particleCount: 60, spread: 70, colors: ['#1D9E75', '#0F6E56', '#9FE1CB'] });
+    confetti({ particleCount: 350, spread: 100, colors: ['#1D9E75', '#0F6E56', '#9FE1CB'] });
   };
 
   const containerVariants = {
