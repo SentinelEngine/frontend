@@ -1,0 +1,8 @@
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5rem; border-bottom: 0.5px solid var(--border); background: rgba(7, 11, 9, 0.92); }
+.nav-logo { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; letter-spacing: -0.3px; }
+.logo-sq { width: 26px; height: 26px; background: var(--teal); border-radius: 5px; display: flex; align-items: center; justify-content: center; }
+.logo-sq svg { width: 14px; height: 14px; fill: #fff; }
+.nav-links { display: flex; gap: 1.8rem; font-size: 13px; color: var(--muted); }
+.nav-links a { color: var(--muted); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-pill { background: var(--teal); color: #fff; border: none; padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; letter-spacing: -0.2px; }

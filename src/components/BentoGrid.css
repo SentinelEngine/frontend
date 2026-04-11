@@ -1,0 +1,21 @@
+/* BENTO */
+.bento-section { padding: 5rem 2rem; background: var(--bg); }
+.bento-label { font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 1.5px; text-align: center; margin-bottom: .6rem; }
+.bento-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1px; text-align: center; margin-bottom: 3rem; }
+.bento-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 12px; max-width: 960px; margin: 0 auto; }
+.bc { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: border-color .2s; text-align: left; }
+.bc:hover { border-color: rgba(29, 158, 117, 0.4); }
+.bc.wide { grid-column: span 2; }
+.bc.tall { grid-row: span 2; }
+.bc-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.bc-t { background: rgba(29, 158, 117, 0.15); }
+.bc-a { background: rgba(245, 158, 11, 0.12); }
+.bc-b { background: rgba(55, 138, 221, 0.12); }
+.bc-p { background: rgba(130, 71, 229, 0.12); }
+.bc-r { background: rgba(226, 75, 74, 0.12); }
+.bc-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.3px; }
+.bc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.mini-graph { margin-top: 1rem; height: 48px; display: flex; align-items: flex-end; gap: 3px; }
+.bar { border-radius: 2px 2px 0 0; transition: height .3s; }
+.svc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+.svc-chip { font-size: 10px; padding: 3px 8px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); }

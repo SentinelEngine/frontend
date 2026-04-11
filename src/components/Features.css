@@ -1,0 +1,54 @@
+/* FEATURE ROWS */
+.feat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 0.5px solid var(--border); min-height: 480px; }
+.feat-row.flip { direction: rtl; }
+.feat-row.flip > * { direction: ltr; }
+.feat-copy { padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; border-right: 0.5px solid var(--border); }
+.feat-row.flip .feat-copy { border-right: none; border-left: 0.5px solid var(--border); }
+.feat-num { font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1.2rem; font-weight: 500; }
+.feat-h { font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; letter-spacing: -1px; line-height: 1.2; margin-bottom: 1rem; }
+.feat-h span { color: var(--teal); }
+.feat-p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+.feat-link { font-size: 13px; color: var(--teal-bright); display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.feat-visual { background: var(--bg2); display: flex; align-items: center; justify-content: center; padding: 2.5rem; }
+
+/* INLINE ANNOTATION VISUAL */
+.ann-wrap { width: 100%; background: var(--bg3); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; font-family: var(--mono); font-size: 12px; text-align: left; }
+.ann-bar { background: #090f0b; padding: 8px 14px; font-size: 11px; color: var(--muted); border-bottom: 0.5px solid var(--border); }
+.ann-line { display: flex; align-items: center; padding: 4px 14px; line-height: 1.9; }
+.ann-line:hover { background: rgba(29, 158, 117, 0.05); }
+.ann-ln { color: rgba(240, 250, 246, 0.2); min-width: 24px; font-size: 10px; }
+.ann-code { color: #9fd9c0; flex: 1; font-size: 11.5px; }
+.ann-badge { font-size: 10px; padding: 2px 7px; border-radius: 4px; margin-left: auto; }
+.cb-hi { background: rgba(226, 75, 74, 0.14); color: #f09595; border: 0.5px solid rgba(226, 75, 74, 0.28); }
+.cb-lo { background: rgba(29, 158, 117, 0.12); color: var(--teal-bright); border: 0.5px solid rgba(29, 158, 117, 0.28); }
+.cb-md { background: rgba(245, 158, 11, 0.12); color: #fcd34d; border: 0.5px solid rgba(245, 158, 11, 0.28); }
+
+
+/* BLOCKCHAIN VISUAL */
+.chain-vis { width: 100%; text-align: left; }
+.chain-block { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 10px; }
+.chain-id { font-size: 10px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.chain-hash { font-family: var(--mono); font-size: 11px; color: var(--teal-bright); word-break: break-all; margin-bottom: 8px; }
+.chain-row { display: flex; justify-content: space-between; align-items: center; }
+.chain-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; }
+.chain-ok { background: rgba(29, 158, 117, 0.15); color: var(--teal-bright); border: 0.5px solid rgba(29, 158, 117, 0.3); }
+.chain-fail { background: rgba(226, 75, 74, 0.12); color: #f09595; border: 0.5px solid rgba(226, 75, 74, 0.3); }
+.chain-ts { font-size: 10px; color: var(--muted); }
+.poly-badge { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); margin-top: 8px; }
+.poly-dot { width: 8px; height: 8px; border-radius: 50%; background: #8247e5; }
+
+/* PR VISUAL */
+.pr-card { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; width: 100%; text-align: left; }
+.pr-head { padding: 14px 16px; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.pr-num { font-size: 12px; color: var(--muted); }
+.pr-title { font-size: 13px; font-weight: 500; }
+.pr-rows { padding: 12px 16px; }
+.pr-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid rgba(240, 250, 246, 0.06); font-size: 12px; }
+.pr-row:last-child { border-bottom: none; }
+.pr-svc { color: var(--muted); }
+.pr-plus { color: #f09595; }
+.pr-minus { color: var(--teal-bright); }
+.pr-total { padding: 12px 16px; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.pr-total-label { font-size: 12px; color: var(--muted); }
+.pr-total-val { font-size: 18px; font-weight: 700; color: #f09595; }
+.pr-anchor { font-size: 10px; color: var(--muted); padding: 8px 16px; border-top: 0.5px solid var(--border); display: flex; align-items: center; gap: 6px; }
