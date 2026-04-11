@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
