@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import './Pricing.css';
 
 interface SpotlightCardProps {
@@ -180,51 +180,6 @@ const Pricing: React.FC = () => {
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.6 }}
       >
-
-        <AnimatePresence>
-          {showTable && (
-            <motion.div
-              className="compare-table-container"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <table className="compare-table">
-                <thead>
-                  <tr>
-                    <th>Features</th>
-                    <th>Free</th>
-                    <th>Pro</th>
-                    <th>Organization</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {features.map((feature, i) => (
-                    <tr key={i}>
-                      <td>{feature.name}</td>
-                      <td>
-                        {typeof feature.free === 'boolean'
-                          ? (feature.free ? <span className="check">✓</span> : <span className="dash">-</span>)
-                          : feature.free}
-                      </td>
-                      <td>
-                        {typeof feature.pro === 'boolean'
-                          ? (feature.pro ? <span className="check">✓</span> : <span className="dash">-</span>)
-                          : feature.pro}
-                      </td>
-                      <td>
-                        {typeof feature.org === 'boolean'
-                          ? (feature.org ? <span className="check">✓</span> : <span className="dash">-</span>)
-                          : feature.org}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.div>
     </section>
   );
