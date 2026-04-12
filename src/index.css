@@ -8,10 +8,18 @@
   --section-gap: 8rem;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; width: 100%; position: relative; }
 
 /* Keep global utility classes out of component CSS if needed, but App wrapper is fine */
 .app-container {
   background: #070b09;
   overflow: hidden;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 3rem;
+    --section-gap: 4rem;
+  }
 }

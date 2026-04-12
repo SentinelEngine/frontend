@@ -62,7 +62,9 @@ const CTASection: React.FC = () => {
         style={{ willChange: 'transform, opacity' }}
       >
         <button className="btn-t cta-btn-anim" onClick={handleConfetti}>Install for VS Code — Free</button>
-        <button className="btn-g cta-btn-anim">View on GitHub <span className="arrow">→</span></button>
+        <a href="https://github.com/SentinelEngine" target="_blank" rel="noopener noreferrer" className="btn-g cta-btn-anim">
+          View on GitHub <span className="arrow">→</span>
+        </a>
       </motion.div>
       <motion.div
         style={{ marginTop: '2rem', fontSize: '12px', color: 'rgba(240,250,246,0.25)', willChange: 'opacity' }}

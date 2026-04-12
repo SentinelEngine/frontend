@@ -1,0 +1,18 @@
+<svg width="100%" viewBox="240 60 200 200" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Code Syntax logo – white icon on dark teal background</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Dollar sign flanked by angle brackets, white on dark teal rounded square</desc>
+
+
+  <!-- White angle bracket left -->
+  <path d="M290 118 L262 160 L290 202" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(255, 255, 255);color:rgb(255, 255, 255);stroke-width:14px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- White angle bracket right -->
+  <path d="M390 118 L418 160 L390 202" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:rgb(255, 255, 255);color:rgb(255, 255, 255);stroke-width:14px;stroke-linecap:round;stroke-linejoin:round;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- White dollar sign -->
+  <text x="340" y="178" text-anchor="middle" style="font-family: var(--font-mono); font-size: 68px; font-weight: 600; fill: white;;fill:rgb(255, 255, 255);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:ui-monospace, monospace;font-size:68px;font-weight:600;text-anchor:middle;dominant-baseline:auto">$</text>
+
+  <!-- Label -->
+  <text x="340" y="310" text-anchor="middle" style="font-family: var(--font-sans); font-size: 15px; font-weight: 500; fill: var(--color-text-primary);;fill:rgb(250, 249, 245);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:15px;font-weight:500;text-anchor:middle;dominant-baseline:auto">Code Syntax &lt;$&gt;</text>
+  <text x="340" y="332" text-anchor="middle" style="font-family: var(--font-sans); font-size: 12px; fill: var(--color-text-secondary);;fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:auto">White on dark teal</text>
+</svg>

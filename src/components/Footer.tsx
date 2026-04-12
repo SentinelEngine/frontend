@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import './Footer.css';
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ onDocsClick?: () => void }> = ({ onDocsClick }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const shouldReduceMotion = useReducedMotion();
 
@@ -31,19 +31,32 @@ const Footer: React.FC = () => {
       style={{ willChange: 'transform, opacity' }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="footer-logo-hover">
-        <div className="logo-sq" style={{ width: '20px', height: '20px' }}>
-          <svg viewBox="0 0 16 16" style={{ width: '10px', height: '10px', fill: '#fff' }}>
-            <path d="M2 8 Q8 2 14 8 Q8 14 2 8Z" />
-          </svg>
+        <div className="logo-sq" style={{ width: '24px', height: '24px', background: 'var(--teal)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0' }}>
+          <img src="/logo.svg" alt="CloudGauge" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
         <span>CloudGauge</span>
       </div>
       <div className="footer-links">
-        {['Privacy', 'Terms', 'Docs', 'GitHub'].map((link, i) => (
-          <motion.span key={i} variants={itemVariants} style={{ willChange: 'transform, opacity' }}>{link}</motion.span>
-        ))}
+        <motion.span variants={itemVariants} style={{ willChange: 'transform, opacity' }}>Privacy</motion.span>
+        <motion.a 
+          href="javascript:void(0)"
+          onClick={onDocsClick}
+          variants={itemVariants} 
+          style={{ willChange: 'transform, opacity', color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}
+        >
+          Docs
+        </motion.a>
+        <motion.a
+          href="https://github.com/SentinelEngine"
+          target="_blank"
+          rel="noopener noreferrer"
+          variants={itemVariants}
+          style={{ willChange: 'transform, opacity', color: 'inherit', textDecoration: 'none' }}
+        >
+          GitHub
+        </motion.a>
       </div>
-    </motion.footer>
+    </motion.footer >
   );
 };
 
