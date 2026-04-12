@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import './Docs.css';
 
 const sections = [
@@ -14,43 +14,6 @@ const sections = [
   { id: 'dev', title: 'Development' },
   { id: 'faq', title: 'FAQ' },
 ];
-
-const Badge = ({ children, color = 'blue' }: { children: React.ReactNode, color?: string }) => {
-  const colors: Record<string, string> = {
-    blue: 'rgba(59, 130, 246, 0.15)',
-    green: 'rgba(16, 185, 129, 0.15)',
-    orange: 'rgba(245, 158, 11, 0.15)',
-    teal: 'rgba(29, 158, 117, 0.15)'
-  };
-  const textColors: Record<string, string> = {
-    blue: '#60a5fa',
-    green: '#34d399',
-    orange: '#fbbf24',
-    teal: '#5dcaa5'
-  };
-
-  return (
-    <motion.span
-      whileHover={{ y: -2, backgroundColor: colors[color].replace('0.15', '0.25') }}
-      style={{
-        padding: '4px 10px',
-        borderRadius: '20px',
-        fontSize: '0.75rem',
-        fontWeight: 600,
-        background: colors[color],
-        color: textColors[color],
-        border: `1px solid ${textColors[color]}33`,
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '6px',
-        marginRight: '8px',
-        cursor: 'default'
-      }}
-    >
-      {children}
-    </motion.span>
-  );
-};
 
 const FeatureCard = ({ title, children }: { title: string, children: React.ReactNode }) => {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
