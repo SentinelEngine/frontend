@@ -236,12 +236,18 @@ const EditorMockup = () => {
   );
 };
 
-const TypewriterHeadline = ({ onComplete }: { onComplete: () => void }) => {
+const TypewriterHeadline = ({ onComplete, isTyped }: { onComplete: () => void, isTyped: boolean }) => {
   const phrase = "ESLint for cloud costs, see your bill as you type.";
   const [text, setText] = React.useState('');
   const [isDone, setIsDone] = React.useState(false);
 
   React.useEffect(() => {
+    if (isTyped) {
+      setText(phrase);
+      setIsDone(true);
+      return;
+    }
+
     if (isDone) return;
 
     const timer = setTimeout(() => {
@@ -254,7 +260,7 @@ const TypewriterHeadline = ({ onComplete }: { onComplete: () => void }) => {
     }, 45);
 
     return () => clearTimeout(timer);
-  }, [text, isDone, onComplete, phrase]);
+  }, [text, isDone, onComplete, phrase, isTyped]);
 
   return (
     <h1 className="typewriter-headline">
@@ -267,6 +273,18 @@ const Hero: React.FC = () => {
   const [isTyped, setIsTyped] = React.useState(false);
   const editorWrapperRef = useRef<HTMLDivElement>(null);
   const editorCardRef = useRef<HTMLDivElement>(null);
+
+  // Skip typewriter on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20 && !isTyped) {
+        setIsTyped(true);
+        // Force complete the typewriter logic
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isTyped]);
 
   useEffect(() => {
     if (!isTyped) return;
@@ -380,7 +398,7 @@ const Hero: React.FC = () => {
             CloudGauge
           </motion.div>
 
-          <TypewriterHeadline onComplete={() => setIsTyped(true)} />
+          <TypewriterHeadline isTyped={isTyped} onComplete={() => setIsTyped(true)} />
 
           <motion.div
             className="hero-btns-new"

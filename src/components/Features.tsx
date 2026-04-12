@@ -172,7 +172,7 @@ const Features: React.FC = () => {
   }, []);
 
   return (
-    <section className="feat-scroll-region" ref={regionRef}>
+    <section className="feat-scroll-region" ref={regionRef} id="features">
       <div className="feat-stack-section" ref={sectionRef}>
         <div className="feat-stack-cards">
           {features.map((f, i) => (

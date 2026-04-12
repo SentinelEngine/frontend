@@ -1,6 +1,27 @@
+.bento-scroll-region {
+  position: relative;
+  width: 100%;
+  background: var(--bg);
+  z-index: 6; /* Slightly higher than Features (5) */
+}
+
+.bento-sticky-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: var(--bg);
+}
+
 .bento-section { 
-  padding: 0 2rem 5rem; 
-  background: var(--bg); 
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 2rem; 
+  background: transparent; 
   position: relative; 
   z-index: 10; 
 }
