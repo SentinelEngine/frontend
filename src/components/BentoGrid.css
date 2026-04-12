@@ -8,13 +8,14 @@
 .bento-sticky-wrapper {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
   background: var(--bg);
+  padding: var(--section-pad) 0;
 }
 
 .bento-section { 
@@ -56,7 +57,10 @@
 .chip-hover-card:hover .svc-chip:nth-child(6) { transition-delay: 0.30s; }
 
 @media (max-width: 768px) {
-  .bento-section { margin-top: -15vh; }
+  .bento-sticky-wrapper {
+    padding: 4rem 0 2.75rem;
+  }
+  .bento-section { margin-top: 0; }
   .bento-grid { grid-template-columns: 1fr; }
   .bc.wide, .bc.tall { grid-column: span 1; grid-row: span 1; }
 }

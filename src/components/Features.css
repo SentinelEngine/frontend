@@ -44,6 +44,12 @@
   border: 1px solid var(--border);
 }
 
+.feat-card:first-child {
+  top: 50%;
+  opacity: 0.9;
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
 .feat-card-container {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -116,8 +116,9 @@ const Features: React.FC = () => {
       if (!cards.length) return;
 
       gsap.set(cards, {
-        top: "118%",
-        scale: 1,
+        top: (i) => i === 0 ? "50%" : "118%",
+        opacity: (i) => i === 0 ? 0.9 : 1,
+        scale: (i) => i === 0 ? 0.98 : 1,
         transformOrigin: "center center",
       });
 
@@ -129,20 +130,20 @@ const Features: React.FC = () => {
           scrub: true,
           pin: sectionRef.current,
           anticipatePin: 1,
-          pinSpacing: false,
           invalidateOnRefresh: true,
         }
       });
 
-      // Step 1: First card fully visible
+      // Keep the first card visible at the handoff, but still let it settle into place.
       tl.to(cards[0], {
         top: "50%",
+        opacity: 1,
+        scale: 1,
         duration: 1.2,
-        ease: "power2.out"
+        ease: "power2.inOut"
       });
 
-      // Pause (user sees full card)
-      tl.to({}, { duration: 0.3 });
+      tl.to({}, { duration: 0.1 });
 
       // Step 2+: Stack cards one by one
       cards.slice(1).forEach((card, i) => {
@@ -162,8 +163,7 @@ const Features: React.FC = () => {
         }, "<");
 
         if (!isLastCard) {
-          // Pause between cards, but release immediately after the final card lands.
-          tl.to({}, { duration: 0.3 });
+          tl.to({}, { duration: 0.2 });
         }
       });
     }, regionRef);

@@ -84,7 +84,7 @@ const HowItWorks: React.FC = () => {
 
       {/* Decorative center glow based on last step */}
       <motion.div 
-        className="cta-glow" 
+        className="pipeline-glow" 
         animate={{ 
           opacity: isLastGlow ? 0.3 : 0.07,
           scale: isLastGlow ? 1.5 : 1
