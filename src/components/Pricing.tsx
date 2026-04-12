@@ -50,28 +50,6 @@ const Pricing: React.FC = () => {
   const proPriceMin = isYearly ? 640 : 800;
   const proPriceMax = isYearly ? 1600 : 2000;
 
-  const features = [
-    { name: "Real-time cost estimation", free: true, pro: true, org: true },
-    { name: "Basic monthly projections", free: true, pro: true, org: true },
-    { name: "Limited reports", free: true, pro: true, org: true },
-    { name: "AI providers supported", free: "1", pro: "Unlimited", org: "Unlimited" },
-    { name: "Community support", free: true, pro: true, org: true },
-    { name: "Advanced cost breakdowns", free: false, pro: true, org: true },
-    { name: "Historical trends", free: false, pro: true, org: true },
-    { name: "Smart optimization suggestions", free: false, pro: true, org: true },
-    { name: "Custom usage modeling", free: false, pro: true, org: true },
-    { name: "Priority support", free: false, pro: true, org: true },
-    { name: "All languages supported", free: false, pro: true, org: true },
-    { name: "PR-level cost tracking", free: false, pro: false, org: true },
-    { name: "Team dashboards", free: false, pro: false, org: true },
-    { name: "Budget alerts", free: false, pro: false, org: true },
-    { name: "Role-based access control", free: false, pro: false, org: true },
-    { name: "Audit logs", free: false, pro: false, org: true },
-    { name: "CI/CD integration", free: false, pro: false, org: true },
-    { name: "Dedicated support", free: false, pro: false, org: true },
-    { name: "SSO", free: false, pro: false, org: true },
-  ];
-
   return (
     <section className="pricing-section" id="pricing" ref={ref}>
       <div className="pricing-header">
