@@ -43,7 +43,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({ children, isPopular }) =>
 
 const Pricing: React.FC = () => {
   const [isYearly, setIsYearly] = useState(false);
-  const [showTable, setShowTable] = useState(false);
+
   const ref = useRef(null);
   const inView = useInView(ref, { margin: "-100px" });
 
