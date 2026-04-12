@@ -1,70 +1,104 @@
-# ⚡ Code. Cost. Control.
+# ⚡ CloudGauge — Code. Cost. Control.
 
-> CloudGauge — Real-time cost intelligence directly inside your code editor.
+> ESLint for Cloud Costs — Real-time cloud cost intelligence inside your editor + interactive dashboard.
 
 ---
 
 ## 📌 Overview
 
-Modern developers write code without visibility into the cloud costs it generates. Costs are only realized after deployment — often leading to unexpected bills.
+Modern cloud applications suffer from a fundamental problem:
 
-**This project solves that by shifting cost awareness from billing time → coding time.**
+> Developers write code today, but understand its cost weeks later.
 
-We provide:
-- Real-time cost estimation  
+This delay leads to:
+- Unexpected cloud bills  
+- Poor cost optimization  
+- Lack of accountability  
+
+**CloudGauge solves this by bringing cost awareness directly into the development phase.**
+
+---
+
+## 🎯 Core Idea
+
+> “Shift cloud cost awareness from billing time → coding time.”
+
+CloudGauge provides:
+- Real-time cost estimation in VS Code  
 - Optimization suggestions  
 - PR-level cost impact tracking  
+- Interactive dashboard for insights  
 - Tamper-proof cost logs using Web3  
 
 ---
 
 ## ❗ Problem
 
-- No cost visibility during development  
-- Billing feedback delayed by weeks  
-- Expensive APIs and cloud usage go unnoticed  
-- No accountability for cost-heavy code changes  
+- No visibility of cost while coding  
+- Feedback loop delayed (billing cycle)  
+- Expensive APIs used unknowingly  
+- No cost accountability in PRs  
+- Reports can be manipulated  
 
 ---
 
 ## 💡 Solution
 
-> “CloudGauge - ESLint for Cloud Costs”
+> “ESLint for Cloud Costs”
 
-A system that:
+CloudGauge:
 - Analyzes your code as you write  
-- Estimates cloud cost in real time  
+- Estimates cloud cost instantly  
 - Suggests optimizations  
 - Tracks cost changes across PRs  
-- Ensures integrity via cryptographic proofs  
+- Ensures trust with blockchain-backed verification  
 
 ---
 
 ## ✨ Features
 
-### 🔹 Real-Time Cost Estimation
-- Detects cloud/API usage from code  
-- Estimates monthly cost instantly  
+### 🔹 Real-Time Cost Estimation (VS Code Extension)
+- Detects API & cloud usage  
+- Shows instant monthly cost projection  
+- Works inside developer workflow  
+
+---
 
 ### 🔹 Optimization Suggestions
-- Suggests cheaper alternatives:
-  - GPT-4 → GPT-3.5  
-  - Add caching  
-  - Batch requests  
+- Suggests cost-saving strategies:
+  - Model switching (GPT-4 → GPT-3.5)  
+  - Caching  
+  - Request batching  
+
+---
 
 ### 🔹 PR Cost Diff
-- Compares cost before vs after changes  
-- Prevents expensive code merges  
+- Compares:
+  - Base branch vs new branch  
+- Shows cost impact of every change  
+- Prevents expensive merges  
+
+---
+
+### 🔹 Interactive Dashboard (Frontend)
+
+The dashboard provides:
+- Cost breakdown visualization  
+- Service-wise cost insights  
+- Historical analysis  
+- Report summaries  
+
+👉 Helps teams understand and track cost trends over time  
+
+---
 
 ### 🔹 Tamper-Proof Cost Logs (Web3)
+
 - Generates SHA-256 hash of cost reports  
-- Stores hash on blockchain (Sepolia)  
+- Stores hash on Sepolia blockchain  
 - Ensures reports cannot be modified  
 
-### 🔹 Developer-First Experience
-- Integrated into VS Code  
-- Inline feedback + suggestions  
-- ESLint-like workflow  
+👉 Adds **trust + auditability**
 
 ---
 
@@ -81,6 +115,8 @@ Cost Estimation Engine
         ↓
 Database (Prisma)
         ↓
+Frontend Dashboard (Vercel)
+        ↓
 Hash Generation (SHA-256)
         ↓
 Blockchain (Sepolia)
@@ -91,16 +127,23 @@ Blockchain (Sepolia)
 ## ⚙️ Tech Stack
 
 ### 🔹 Frontend
-- VS Code Extension API  
+- React (Vercel Deployment)
+- Dashboard UI for cost visualization
+
+---
 
 ### 🔹 Backend
 - TypeScript  
 - Node.js  
-- AST Parsing (Babel / TypeScript Compiler API)  
+- AST Parsing (Babel / TS Compiler API)  
+
+---
 
 ### 🔹 Database
 - Prisma ORM  
-- PostgreSQL / MongoDB  
+- PostgreSQL  
+
+---
 
 ### 🔹 Web3 Layer
 - Solidity (Smart Contract)  
@@ -112,49 +155,47 @@ Blockchain (Sepolia)
 ## 🔍 How It Works
 
 ### 1. Code Analysis
-- Parses code using AST  
-- Detects usage of:
-  - LLM APIs  
-  - Cloud services  
-  - External APIs  
-
-### 2. Cost Estimation
-- Maps usage → pricing models  
-- Calculates monthly cost projection  
-
-### 3. Optimization Engine
-- Identifies expensive patterns  
-- Suggests cost-saving alternatives  
-
-### 4. PR Cost Diff
-- Compares:
-  - Base branch cost  
-  - New branch cost  
-- Outputs cost difference  
-
-### 5. Tamper-Proof Logging
-- Converts report → JSON  
-- Generates SHA-256 hash  
-- Stores:
-  - Full report → DB  
-  - Hash → Blockchain  
+- Parses source code using AST  
+- Detects API/cloud usage patterns  
 
 ---
 
-## 🔐 Web3 Integration
+### 2. Cost Estimation
+- Maps detected services → pricing models  
+- Estimates monthly cost based on usage assumptions  
 
-We use Web3 **only for verification**, not computation.
+---
 
-### Flow
+### 3. Optimization Engine
+- Identifies expensive patterns  
+- Suggests alternatives with cost impact  
+
+---
+
+### 4. PR Cost Diff
+- Computes:
+  - Before cost  
+  - After cost  
+- Outputs difference  
+
+---
+
+### 5. Dashboard Visualization
+- Displays:
+  - Cost trends  
+  - Service-level breakdown  
+  - Report summaries  
+
+---
+
+### 6. Web3 Verification
 
 ```
-Cost Report → Hash → Store on Sepolia
+Cost Report → SHA-256 Hash → Stored On-Chain
 ```
 
-### Benefits
-- Immutable records  
-- Verifiable cost history  
-- Audit-ready system  
+- Only hash stored on blockchain  
+- Full data stored in DB  
 
 ---
 
@@ -163,42 +204,10 @@ Cost Report → Hash → Store on Sepolia
 1. Open code in VS Code  
 2. Detect API usage  
 3. Show cost estimate  
-4. Display optimization suggestions  
-5. Show PR cost difference  
-6. Modify report → verification fails (tampering detected)  
-
----
-
-## 🛠️ Setup
-
-### 🔹 Backend
-
-```bash
-npm install
-npm run dev
-```
-
-### 🔹 Environment Variables
-
-```env
-DATABASE_URL=...
-RPC_URL=...
-PRIVATE_KEY=...
-CONTRACT_ADDRESS=...
-```
-
-### 🔹 VS Code Extension
-
-```bash
-npm install
-npm run compile
-# Press F5 to run extension
-```
-
-### 🔹 Smart Contract
-
-- Deploy contract on Sepolia  
-- Store contract address in `.env`  
+4. Apply optimization → cost drops  
+5. Show PR cost diff  
+6. View report in dashboard  
+7. Verify report integrity via blockchain  
 
 ---
 
@@ -206,14 +215,33 @@ npm run compile
 
 ```js
 // Before
-use GPT-4 → $200/month
+use GPT-4 → $1000/month
 
 // After optimization
-use GPT-3.5 → $40/month
+use GPT-3.5 → $200/month
 
 // Add caching
-→ $15/month
+→ $50/month
 ```
+
+---
+
+## 🔐 Web3 Justification
+
+We use Web3 **only for verification**, not computation.
+
+### Why?
+
+- Prevent report tampering  
+- Provide audit trail  
+- Enable trust in cost data  
+
+---
+
+## 🧠 Key Insight
+
+> “We don’t just show developers that their code is expensive —  
+we show them how to make it cheaper instantly.”
 
 ---
 
@@ -221,10 +249,9 @@ use GPT-3.5 → $40/month
 
 - CI/CD integration (PR gating)  
 - Multi-cloud support (AWS, GCP, Azure)  
-- Advanced AI-based optimization  
-- Cost heatmaps in editor  
-- Enterprise dashboards  
-- On-chain audit dashboards  
+- AI-driven optimization engine  
+- Cost heatmaps inside editor  
+- Enterprise cost governance tools  
 
 ---
 
@@ -235,12 +262,6 @@ Contributions are welcome!
 - Fork the repository  
 - Create a feature branch  
 - Submit a pull request  
-
----
-
-## 🧠 Key Insight
-
-> “We don’t just show developers that their code is expensive — we tell them how to make it cheaper, instantly.”
 
 ---
 
