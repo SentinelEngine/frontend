@@ -52,7 +52,7 @@ const CTASection: React.FC = () => {
         transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : 0.6 }}
         style={{ willChange: 'transform, opacity' }}
       >
-        Install CloudCost Lens and see costs as you write — not 30 days later.
+        Install CloudGauge and see costs as you write — not 30 days later.
       </motion.p>
       <motion.div
         className="cta-btns"

@@ -17,28 +17,28 @@ const TickerItem = ({ finalValue, suffix, label, delay = 0 }: { finalValue: numb
       const duration = 1800; // 1.8s
       const startTime = performance.now();
       let canceled = false;
-      
+
       const animateCount = (currentTime: number) => {
         if (canceled) return;
         const elapsed = currentTime - startTime;
         let progress = Math.min(elapsed / duration, 1);
         const easeOut = 1 - Math.pow(1 - progress, 3);
         const currentVal = Math.floor(finalValue * easeOut);
-        
+
         setDisplayValue(currentVal);
-        
+
         if (progress < 1) {
           requestAnimationFrame(animateCount);
         }
       };
-      
+
       const timeoutId = setTimeout(() => requestAnimationFrame(animateCount), delay * 1000);
       return () => { canceled = true; clearTimeout(timeoutId); };
     }
   }, [inView, finalValue, delay, shouldReduceMotion]);
 
   return (
-    <motion.div 
+    <motion.div
       className="tick-item"
       ref={ref}
       initial={{ opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 }}

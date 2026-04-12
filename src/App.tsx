@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import './App.css';
 
-const StatTicker = lazy(() => import('./components/StatTicker'));
 const Features = lazy(() => import('./components/Features'));
 const BentoGrid = lazy(() => import('./components/BentoGrid'));
 const HowItWorks = lazy(() => import('./components/HowItWorks'));
@@ -38,7 +37,6 @@ function App() {
       <Navbar />
       <Hero />
       <Suspense fallback={<div style={{ height: '100vh' }}></div>}>
-        <StatTicker />
         <Features />
         <BentoGrid />
         <HowItWorks />

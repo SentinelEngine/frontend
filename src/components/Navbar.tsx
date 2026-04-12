@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <div className={`nav-backdrop ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(false)}></div>
-      <motion.nav 
+      <motion.nav
         className={`nav ${scrolled ? 'nav-scrolled' : ''}`}
         initial={{ y: shouldReduceMotion ? 0 : -20, opacity: shouldReduceMotion ? 1 : 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -60,8 +60,8 @@ const Navbar: React.FC = () => {
         style={{ willChange: 'transform, opacity' }}
       >
         <div className="nav-logo" style={{ zIndex: 101 }}>
-          <div className="logo-sq"><svg viewBox="0 0 16 16"><path d="M2 8 Q8 2 14 8 Q8 14 2 8Z"/></svg></div>
-          CloudCost Lens
+          <div className="logo-sq"><svg viewBox="0 0 16 16"><path d="M2 8 Q8 2 14 8 Q8 14 2 8Z" /></svg></div>
+          CloudGauge
         </div>
         <div className={`nav-links ${isOpen ? 'open' : ''}`}>
           <a href="#" onClick={() => setIsOpen(false)}>Docs</a>

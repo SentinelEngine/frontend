@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, animate, useReducedMotion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './Hero.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ParticleCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,7 +21,7 @@ const ParticleCanvas = () => {
     const init = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-      particles = Array.from({ length: 140 }, () => ({
+      particles = Array.from({ length: 200 }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 3 + 1,
@@ -232,75 +236,213 @@ const EditorMockup = () => {
   );
 };
 
-const Hero: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion();
+const TypewriterHeadline = ({ onComplete }: { onComplete: () => void }) => {
+  const phrase = "ESLint for cloud costs, see your bill as you type.";
+  const [text, setText] = React.useState('');
+  const [isDone, setIsDone] = React.useState(false);
 
-  const container = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.07 }
+  React.useEffect(() => {
+    if (isDone) return;
+
+    const timer = setTimeout(() => {
+      if (text.length < phrase.length) {
+        setText(phrase.substring(0, text.length + 1));
+      } else {
+        setIsDone(true);
+        setTimeout(onComplete, 500); // Slight delay before centering
+      }
+    }, 45);
+
+    return () => clearTimeout(timer);
+  }, [text, isDone, onComplete, phrase]);
+
+  return (
+    <h1 className="typewriter-headline">
+      {text}<span className="cursor-blink">|</span>
+    </h1>
+  );
+};
+
+const ScrollReveal = ({ children }: { children: React.ReactNode }) => {
+  const [isVisible, setIsVisible] = React.useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  };
 
-  const wordAnim = {
-    hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 20 },
-    visible: { opacity: 1, y: 0, transition: { ease: "easeOut" as const, duration: shouldReduceMotion ? 0 : 0.5 } }
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal-inner ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+const Hero: React.FC = () => {
+  const [isTyped, setIsTyped] = React.useState(false);
+  const editorWrapperRef = useRef<HTMLDivElement>(null);
+  const editorCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isTyped) return;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: editorWrapperRef.current,
+          start: "top top",
+          end: "+=1500",
+          scrub: true,
+          pin: true,
+        }
+      });
+
+      // Step 1: scale to 1.0 and flatten tilt
+      tl.to(editorCardRef.current, {
+        scale: 1,
+        rotateX: 0,
+        duration: 1,
+        ease: "power2.out"
+      });
+
+      // Step 2: expand to 80vw / 70vh (reduced size by 15%)
+      tl.to(editorCardRef.current, {
+        width: "80vw",
+        height: "70vh",
+        borderRadius: 20,
+        duration: 2,
+        ease: "power2.out"
+      });
+
+      // Hold this wide state for a moment
+      tl.to({}, { duration: 1 });
+
+      // Step 3: LIQUID EXIT - Dissolve and scale down in center to clear for Features
+      tl.to(editorCardRef.current, {
+        scale: 0.95,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.inOut"
+      });
+      // Fade out the wrapper background
+      tl.to(editorWrapperRef.current, {
+        opacity: 0,
+        duration: 0.4
+      }, "-=0.4");
+    }, editorWrapperRef);
+
+    return () => ctx.revert();
+  }, [isTyped]);
+
+  const containerVariants = {
+    typing: {
+      top: '40%',
+      left: '5vw',
+      right: 'auto',
+      x: 0,
+      y: '-50%',
+      textAlign: 'left' as const,
+      flexDirection: 'column' as const,
+      alignItems: 'flex-start' as const
+    },
+    centered: {
+      top: '50%',
+      right: 'auto',
+      left: '50%',
+      x: '-50%',
+      y: '-50%',
+      textAlign: 'center' as const,
+      flexDirection: 'column' as const,
+      alignItems: 'center' as const
+    }
   };
 
   return (
     <section className="hero">
-      <div className="hero-dots" style={window.innerWidth >= 768 ? { display: 'none' } : {}}></div>
-      <MagneticGridCanvas />
-      <div className="hero-glow"></div>
-      <ParticleCanvas />
+      <div className="hero-main">
+        <MagneticGridCanvas />
+        <div className="hero-glow"></div>
+        <ParticleCanvas />
 
-      <motion.div
-        className="badge"
-        initial={{ y: shouldReduceMotion ? 0 : -16, opacity: shouldReduceMotion ? 1 : 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, ease: "easeOut", duration: shouldReduceMotion ? 0 : 0.5 }}
-        style={{ willChange: 'transform, opacity' }}
-      >
-        <span className="badge-dot"></span>Now with on-chain audit trail
-      </motion.div>
+        <motion.div
+          className="hero-content-wrapper"
+          initial="typing"
+          animate={isTyped ? "centered" : "typing"}
+          variants={containerVariants}
+          transition={{
+            type: "spring",
+            stiffness: 40,
+            damping: 15,
+            duration: 1.2,
+            ease: "easeInOut"
+          }}
+          style={{
+            position: 'absolute',
+            display: 'flex',
+            zIndex: 10
+          }}
+        >
+          <motion.div
+            className="hero-brand"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isTyped ? 1 : 0, y: isTyped ? 0 : 20 }}
+            transition={{ delay: isTyped ? 0.3 : 0 }}
+            style={{ marginBottom: '1.5rem', justifyContent: isTyped ? 'center' : 'flex-start' }}
+          >
+            <div className="brand-sq" style={{ width: '24px', height: '24px', background: 'var(--teal)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
+              <svg viewBox="0 0 16 16"><path d="M2 8 Q8 2 14 8 Q8 14 2 8Z" fill="white" /></svg>
+            </div>
+            CloudGauge
+          </motion.div>
 
-      <motion.h1 variants={container} initial="hidden" animate="visible" style={{ position: 'relative', zIndex: 1, willChange: 'opacity' }}>
-        <motion.span variants={wordAnim} style={{ display: 'inline-block', willChange: 'transform, opacity' }}>See&nbsp;</motion.span>
-        <motion.span variants={wordAnim} style={{ display: 'inline-block', willChange: 'transform, opacity' }}>your&nbsp;</motion.span>
-        <motion.span variants={wordAnim} style={{ display: 'inline-block', willChange: 'transform, opacity' }}>
-          <em style={{ fontStyle: 'italic', color: 'var(--teal)', fontWeight: 300 }}>cloud bill</em>
-        </motion.span>
-        <br />
-        <motion.span variants={wordAnim} style={{ display: 'inline-block', willChange: 'transform, opacity' }}>as&nbsp;</motion.span>
-        <motion.span variants={wordAnim} style={{ display: 'inline-block', willChange: 'transform, opacity' }}>you&nbsp;</motion.span>
-        <motion.span variants={wordAnim} style={{ display: 'inline-block', willChange: 'transform, opacity' }}>type</motion.span>
-      </motion.h1>
+          <TypewriterHeadline onComplete={() => setIsTyped(true)} />
 
-      <motion.p
-        className="hero-sub"
-        initial={{ y: shouldReduceMotion ? 0 : 12, opacity: shouldReduceMotion ? 1 : 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.5, ease: "easeOut", duration: shouldReduceMotion ? 0 : 0.5 }}
-        style={{ willChange: 'transform, opacity' }}
-      >
-        ESLint for cloud costs. Detect expensive API calls, LLM usage, and AWS services inline — before you ever hit commit.
-      </motion.p>
+          <motion.div
+            className="hero-btns-new"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isTyped ? 1 : 0, y: isTyped ? 0 : 20 }}
+            transition={{ delay: isTyped ? 0.5 : 0 }}
+          >
+            <button className="btn-primary">Install for VS Code</button>
+            <button className="btn-secondary">View on GitHub →</button>
+          </motion.div>
+        </motion.div>
 
-      <motion.div
-        className="hero-btns"
-        style={{ position: 'relative', zIndex: 1, willChange: 'opacity' }}
-        initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: shouldReduceMotion ? 0 : 0.5 }}
-      >
-        <button className="btn-t">Install Extension — Free</button>
-        <button className="btn-g">View on GitHub <span className="arrow">→</span></button>
-      </motion.div>
+        <motion.div
+          className="scroll-indicator"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isTyped ? 1 : 0 }}
+          transition={{ delay: 1.5 }}
+        >
+        </motion.div>
+      </div>
 
-      <EditorMockup />
+      {/* GSAP Expansion Wrapper */}
+      <div className="editor-reveal-wrapper" ref={editorWrapperRef}>
+        <div className="editor-expandable-card" ref={editorCardRef}>
+          <EditorMockup />
+        </div>
+      </div>
     </section>
   );
 };
 
 export default Hero;
+

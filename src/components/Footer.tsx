@@ -9,10 +9,10 @@ const Footer: React.FC = () => {
 
   const containerVariants = {
     hidden: { opacity: shouldReduceMotion ? 1 : 0, y: shouldReduceMotion ? 0 : 10 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: shouldReduceMotion ? 0 : 0.4, staggerChildren: shouldReduceMotion ? 0 : 0.05, delayChildren: shouldReduceMotion ? 0 : 0.2 } 
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.4, staggerChildren: shouldReduceMotion ? 0 : 0.05, delayChildren: shouldReduceMotion ? 0 : 0.2 }
     }
   };
 
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <motion.footer 
+    <motion.footer
       className="footer"
       ref={ref}
       variants={containerVariants}
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             <path d="M2 8 Q8 2 14 8 Q8 14 2 8Z" />
           </svg>
         </div>
-        <span>CloudCost Lens</span>
+        <span>CloudGauge</span>
       </div>
       <div className="footer-links">
         {['Privacy', 'Terms', 'Docs', 'GitHub'].map((link, i) => (
