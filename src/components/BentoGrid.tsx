@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './BentoGrid.css';
@@ -62,7 +61,7 @@ const BentoGrid: React.FC = () => {
         scrollTrigger: {
           trigger: regionRef.current,
           start: "top top",
-          end: "+=1200", // Adjusted for better feel
+          end: () => `+=${Math.min(820, Math.max(560, window.innerHeight * 0.75))}`,
           scrub: 1,
           pin: wrapperRef.current,
           pinSpacing: true, // Let GSAP handle the padding to avoid black gaps
@@ -100,28 +99,8 @@ const BentoGrid: React.FC = () => {
         }, "-=0.6");
       }
 
-      // 3. HOLD
-      tl.to({}, { duration: 2.0 });
-
-      // 4. Cards exit
-      tl.to(cards, {
-        x: (i) => {
-          const isLeft = [0, 3].includes(i);
-          return isLeft ? -500 : 500;
-        },
-        opacity: 0,
-        scale: 0.95,
-        stagger: 0.05,
-        duration: 0.8,
-        ease: "power2.in",
-      });
-
-      // 5. Header fade out
-      tl.to(headerRef.current, {
-        opacity: 0,
-        y: -20,
-        duration: 0.4,
-      }, "<");
+      // Hold the completed grid briefly, then let the next section arrive.
+      tl.to({}, { duration: 0.7 });
 
       // Crucial: Refresh on mount
       ScrollTrigger.refresh();
