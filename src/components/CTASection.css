@@ -14,7 +14,7 @@
   color: transparent;
 }
 
-.cta-btns button {
+.cta-btns button, .cta-btns a {
   padding: 14px 28px;
   border-radius: 12px;
   font-size: 15px;
@@ -27,6 +27,7 @@
   font-family: inherit;
   border: none;
   outline: none;
+  text-decoration: none;
 }
 
 .btn-t {
@@ -71,12 +72,22 @@
   transform: translateY(0);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .cta-section { padding: 4rem 1.2rem; }
+  .cta-section h2 { font-size: 28px; letter-spacing: -1px; margin-bottom: 1.5rem; }
   .cta-btns {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
   }
   .cta-btns button {
+    width: 100%;
     justify-content: center;
+    font-size: 14px;
+    padding: 12px 24px;
   }
+  .cta-glow { width: 300px; }
 }
+

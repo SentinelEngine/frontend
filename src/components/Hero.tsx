@@ -390,8 +390,8 @@ const Hero: React.FC = () => {
             transition={{ delay: isTyped ? 0.3 : 0 }}
             style={{ marginBottom: '1.5rem', justifyContent: isTyped ? 'center' : 'flex-start' }}
           >
-            <div className="brand-sq" style={{ width: '24px', height: '24px', background: 'var(--teal)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px' }}>
-              <svg viewBox="0 0 16 16"><path d="M2 8 Q8 2 14 8 Q8 14 2 8Z" fill="white" /></svg>
+            <div className="brand-sq" style={{ width: '28px', height: '28px', background: 'var(--teal)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0' }}>
+              <img src="/logo.svg" alt="CloudGauge" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             CloudGauge
           </motion.div>
@@ -405,7 +405,9 @@ const Hero: React.FC = () => {
             transition={{ delay: isTyped ? 0.5 : 0 }}
           >
             <button className="btn-primary">Install for VS Code</button>
-            <button className="btn-secondary">View on GitHub →</button>
+            <a href="https://github.com/SentinelEngine" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              View on GitHub →
+            </a>
           </motion.div>
         </motion.div>
 

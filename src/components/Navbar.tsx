@@ -40,7 +40,7 @@ const Hamburger = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => void }) 
   </button>
 );
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<{ setView: (v: string) => void, currentView: string }> = ({ setView, currentView }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -50,6 +50,11 @@ const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNav = (v: string) => {
+    setView(v);
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -61,18 +66,31 @@ const Navbar: React.FC = () => {
         transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
         style={{ willChange: 'transform, opacity' }}
       >
-        <div className="nav-logo" style={{ zIndex: 101 }}>
-          <div className="logo-sq"><svg viewBox="0 0 16 16"><path d="M2 8 Q8 2 14 8 Q8 14 2 8Z" /></svg></div>
+        <div className="nav-logo" style={{ zIndex: 101, cursor: 'pointer' }} onClick={() => handleNav('home')}>
+          <div className="logo-sq">
+            <img src="/logo.svg" alt="CloudGauge" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
           CloudGauge
         </div>
         <div className={`nav-links ${isOpen ? 'open' : ''}`}>
-          <a href="#" onClick={() => setIsOpen(false)}>Docs</a>
-          <a href="#features" onClick={() => setIsOpen(false)}>Features</a>
-          <a href="#" onClick={() => setIsOpen(false)}>Pricing</a>
-          <a href="#" onClick={() => setIsOpen(false)}>Changelog</a>
+          <a
+            href="javascript:void(0)"
+            className={currentView === 'docs' ? 'active' : ''}
+            onClick={() => handleNav('docs')}
+          >
+            Docs
+          </a>
+          {currentView === 'home' ? (
+            <>
+              <a href="#features" onClick={() => setIsOpen(false)}>Features</a>
+              <a href="#pricing" onClick={() => setIsOpen(false)}>Pricing</a>
+            </>
+          ) : (
+            <a href="javascript:void(0)" onClick={() => handleNav('home')}>Home</a>
+          )}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', zIndex: 101 }}>
-          <button className="nav-pill">
+          <button className="nav-pill" onClick={() => handleNav('')}>
             <span className="pill-dot"></span>
             Install for VS Code
           </button>
@@ -82,5 +100,6 @@ const Navbar: React.FC = () => {
     </>
   );
 };
+
 
 export default Navbar;
