@@ -61,7 +61,9 @@ const CTASection: React.FC = () => {
         transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : 0.8 }}
         style={{ willChange: 'transform, opacity' }}
       >
-        <button className="btn-t cta-btn-anim" onClick={handleConfetti}>Install for VS Code — Free</button>
+        <a href="https://marketplace.visualstudio.com/items?itemName=cloudcostguard.cloud-cost-guard" target="_blank" rel="noopener noreferrer" className="btn-t cta-btn-anim" onClick={handleConfetti}>
+          Install for VS Code — Free
+        </a>
         <a href="https://github.com/SentinelEngine" target="_blank" rel="noopener noreferrer" className="btn-g cta-btn-anim">
           View on GitHub <span className="arrow">→</span>
         </a>

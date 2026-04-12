@@ -404,7 +404,9 @@ const Hero: React.FC = () => {
             animate={{ opacity: isTyped ? 1 : 0, y: isTyped ? 0 : 20 }}
             transition={{ delay: isTyped ? 0.5 : 0 }}
           >
-            <button className="btn-primary">Install for VS Code</button>
+            <a href="https://marketplace.visualstudio.com/items?itemName=cloudcostguard.cloud-cost-guard" target="_blank" rel="noopener noreferrer" className="btn-primary">
+              Install for VS Code
+            </a>
             <a href="https://github.com/SentinelEngine" target="_blank" rel="noopener noreferrer" className="btn-secondary">
               View on GitHub →
             </a>

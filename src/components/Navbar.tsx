@@ -90,10 +90,10 @@ const Navbar: React.FC<{ setView: (v: string) => void, currentView: string }> = 
           )}
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', zIndex: 101 }}>
-          <button className="nav-pill" onClick={() => handleNav('')}>
+          <a href="https://marketplace.visualstudio.com/items?itemName=cloudcostguard.cloud-cost-guard" target="_blank" rel="noopener noreferrer" className="nav-pill">
             <span className="pill-dot"></span>
             Install for VS Code
-          </button>
+          </a>
           <Hamburger isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} />
         </div>
       </motion.nav>

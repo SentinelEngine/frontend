@@ -95,7 +95,9 @@ const Pricing: React.FC = () => {
               <span className="currency">₹</span>0<span className="period">/month</span>
             </div>
             <p className="tier-desc">Essential cost tracking for independent developers.</p>
-            <button className="call-to-action-btn secondary">Install Free</button>
+            <a href="https://marketplace.visualstudio.com/items?itemName=cloudcostguard.cloud-cost-guard" target="_blank" rel="noopener noreferrer" className="call-to-action-btn secondary">
+              Install Free
+            </a>
             <ul className="tier-features">
               <li>Real-time cost estimation in VS Code</li>
               <li>Basic monthly projections</li>
