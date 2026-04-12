@@ -19,36 +19,40 @@ const BentoGrid: React.FC = () => {
       const isMobile = window.innerWidth <= 768;
 
       if (isMobile) {
-        // Simple fade-in for mobile
-        gsap.to(headerRef.current, {
-          opacity: 1,
-          y: 0,
+        gsap.set(headerRef.current, { opacity: 0, y: 20 });
+        gsap.set(cards, { opacity: 0, y: 36, scale: 0.96 });
+
+        const mobileTl = gsap.timeline({
           scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 80%",
+            trigger: regionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
           }
         });
 
-        gsap.to(cards, {
+        mobileTl.to(headerRef.current, {
           opacity: 1,
-          x: 0,
+          y: 0,
+          duration: 0.45,
+          ease: "power2.out",
+        });
+
+        mobileTl.to(cards, {
+          opacity: 1,
           y: 0,
           scale: 1,
-          stagger: 0.1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: ".bento-grid",
-            start: "top 80%",
-          }
-        });
+          stagger: 0.08,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.15");
         return;
       }
 
-      // Initial state: cards off-screen
+      // Initial state: cards ready to slide in when the section reaches the viewport.
       gsap.set(cards, {
         x: (i) => {
           const isLeft = [0, 3].includes(i); // C1 and C4 enter from left
-          return isLeft ? -500 : 500;
+          return isLeft ? -260 : 260;
         },
         opacity: 0,
         y: 40,
@@ -60,11 +64,8 @@ const BentoGrid: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: regionRef.current,
-          start: "top top",
-          end: () => `+=${Math.min(820, Math.max(560, window.innerHeight * 0.75))}`,
-          scrub: 1,
-          pin: wrapperRef.current,
-          pinSpacing: true, // Let GSAP handle the padding to avoid black gaps
+          start: "top 72%",
+          toggleActions: "play none none reverse",
           invalidateOnRefresh: true,
         }
       });
@@ -98,9 +99,6 @@ const BentoGrid: React.FC = () => {
           ease: "back.out(1.7)",
         }, "-=0.6");
       }
-
-      // Hold the completed grid briefly, then let the next section arrive.
-      tl.to({}, { duration: 0.7 });
 
       // Crucial: Refresh on mount
       ScrollTrigger.refresh();

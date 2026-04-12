@@ -4,6 +4,8 @@
   --amber: #F59E0B; --red: #E24B4A; --bg: #070b09; --bg2: #0d1510; --bg3: #111a14;
   --text: #f0faf6; --muted: rgba(240,250,246,0.5); --faint: rgba(240,250,246,0.15);
   --border: rgba(29,158,117,0.18); --mono: 'Courier New', monospace;
+  --section-pad: 5rem;
+  --section-gap: 8rem;
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }

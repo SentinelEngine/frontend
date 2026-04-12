@@ -294,9 +294,10 @@ const Hero: React.FC = () => {
         scrollTrigger: {
           trigger: editorWrapperRef.current,
           start: "top top",
-          end: "+=1500",
-          scrub: true,
+          end: () => "+=500", // Much shorter scroll distance to avoid gaps
+          scrub: 1, // Add a bit of smoothing to the scrub
           pin: true,
+          invalidateOnRefresh: true,
         }
       });
 
@@ -317,21 +318,18 @@ const Hero: React.FC = () => {
         ease: "power2.out"
       });
 
-      // Hold this wide state for a moment
-      tl.to({}, { duration: 1 });
+      // Hold this wide state briefly before handing off to the feature stack.
+      tl.to({}, { duration: 0.2 });
 
       // Step 3: LIQUID EXIT - Dissolve and scale down in center to clear for Features
+      // Step 3: LIQUID EXIT - Dissolve quickly
       tl.to(editorCardRef.current, {
-        scale: 0.95,
+        scale: 0.9,
         opacity: 0,
-        duration: 0.8,
-        ease: "power2.inOut"
+        filter: "blur(10px)",
+        duration: 0.4,
+        ease: "power2.in"
       });
-      // Fade out the wrapper background
-      tl.to(editorWrapperRef.current, {
-        opacity: 0,
-        duration: 0.4
-      }, "-=0.4");
     }, editorWrapperRef);
 
     return () => ctx.revert();
