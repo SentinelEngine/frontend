@@ -106,22 +106,31 @@ const features = [
 ];
 
 const Features: React.FC = () => {
+  const regionRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+      if (!cards.length) return;
+
+      gsap.set(cards, {
+        top: "118%",
+        scale: 1,
+        transformOrigin: "center center",
+      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: regionRef.current,
           start: "top top",
-          end: "+=2000",
+          end: "bottom top",
           scrub: true,
-          pin: true,
+          pin: sectionRef.current,
           anticipatePin: 1,
-          pinSpacing: true
+          pinSpacing: false,
+          invalidateOnRefresh: true,
         }
       });
 
@@ -133,15 +142,12 @@ const Features: React.FC = () => {
       });
 
       // Pause (user sees full card)
-      tl.to({}, { duration: 0.2 });
-
-      tl.to(cards[cards.length - 1], {
-        scale: 1,
-        duration: 0.3,
-      });
+      tl.to({}, { duration: 0.3 });
 
       // Step 2+: Stack cards one by one
       cards.slice(1).forEach((card, i) => {
+        const isLastCard = i === cards.length - 2;
+
         tl.to(card, {
           top: "50%",
           duration: 1,
@@ -155,43 +161,47 @@ const Features: React.FC = () => {
           ease: "power2.out"
         }, "<");
 
-        // Pause between cards
-        tl.to({}, { duration: 0.5 });
+        if (!isLastCard) {
+          // Pause between cards, but release immediately after the final card lands.
+          tl.to({}, { duration: 0.3 });
+        }
       });
-    }, sectionRef);
+    }, regionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="feat-stack-section" ref={sectionRef}>
-      <div className="feat-stack-cards">
-        {features.map((f, i) => (
-          <div
-            className="feat-card"
-            key={i}
-            ref={el => { cardsRef.current[i] = el; }}
-            style={{ zIndex: i + 1 }}
-          >
-            <div className="feat-card-container">
-              {/* LEFT: Text */}
-              <div className="feat-card-copy">
-                <div className="feat-card-num" style={{ color: f.accent }}>{f.num}</div>
-                <h2 className="feat-card-h">
-                  {f.title}<br />
-                  <span style={{ color: f.accent }}>{f.titleSpan}</span>
-                </h2>
-                <p className="feat-card-p">{f.desc}</p>
-                <div className="feat-card-link" style={{ color: f.accent }}>{f.link}</div>
-              </div>
+    <section className="feat-scroll-region" ref={regionRef}>
+      <div className="feat-stack-section" ref={sectionRef}>
+        <div className="feat-stack-cards">
+          {features.map((f, i) => (
+            <div
+              className="feat-card"
+              key={i}
+              ref={el => { cardsRef.current[i] = el; }}
+              style={{ zIndex: i + 1 }}
+            >
+              <div className="feat-card-container">
+                {/* LEFT: Text */}
+                <div className="feat-card-copy">
+                  <div className="feat-card-num" style={{ color: f.accent }}>{f.num}</div>
+                  <h2 className="feat-card-h">
+                    {f.title}<br />
+                    <span style={{ color: f.accent }}>{f.titleSpan}</span>
+                  </h2>
+                  <p className="feat-card-p">{f.desc}</p>
+                  <div className="feat-card-link" style={{ color: f.accent }}>{f.link}</div>
+                </div>
 
-              {/* RIGHT: Visual */}
-              <div className="feat-card-visual">
-                {f.visual}
+                {/* RIGHT: Visual */}
+                <div className="feat-card-visual">
+                  {f.visual}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

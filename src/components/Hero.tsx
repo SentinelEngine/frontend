@@ -263,38 +263,6 @@ const TypewriterHeadline = ({ onComplete }: { onComplete: () => void }) => {
   );
 };
 
-const ScrollReveal = ({ children }: { children: React.ReactNode }) => {
-  const [isVisible, setIsVisible] = React.useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal-inner ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`}
-    >
-      {children}
-    </div>
-  );
-};
-
 const Hero: React.FC = () => {
   const [isTyped, setIsTyped] = React.useState(false);
   const editorWrapperRef = useRef<HTMLDivElement>(null);
@@ -445,4 +413,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-

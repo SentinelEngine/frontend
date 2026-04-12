@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import './Navbar.css';
 
-const Path = (props: any) => (
+type PathProps = React.ComponentProps<typeof motion.path>;
+
+const Path = (props: PathProps) => (
   <motion.path
     fill="transparent"
     strokeWidth="2"

@@ -11,8 +11,8 @@ const TickerItem = ({ finalValue, suffix, label, delay = 0 }: { finalValue: numb
   useEffect(() => {
     if (inView) {
       if (shouldReduceMotion) {
-        setDisplayValue(finalValue);
-        return;
+        const frameId = requestAnimationFrame(() => setDisplayValue(finalValue));
+        return () => cancelAnimationFrame(frameId);
       }
       const duration = 1800; // 1.8s
       const startTime = performance.now();
@@ -21,7 +21,7 @@ const TickerItem = ({ finalValue, suffix, label, delay = 0 }: { finalValue: numb
       const animateCount = (currentTime: number) => {
         if (canceled) return;
         const elapsed = currentTime - startTime;
-        let progress = Math.min(elapsed / duration, 1);
+        const progress = Math.min(elapsed / duration, 1);
         const easeOut = 1 - Math.pow(1 - progress, 3);
         const currentVal = Math.floor(finalValue * easeOut);
 

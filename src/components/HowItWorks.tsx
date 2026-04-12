@@ -10,8 +10,8 @@ const StepNumber = ({ finalValue, inView }: { finalValue: number, inView: boolea
   useEffect(() => {
     if (inView) {
       if (shouldReduceMotion) {
-        setDisplayValue(finalValue);
-        return;
+        const frameId = requestAnimationFrame(() => setDisplayValue(finalValue));
+        return () => cancelAnimationFrame(frameId);
       }
       const duration = 1000;
       const startTime = performance.now();
@@ -19,7 +19,7 @@ const StepNumber = ({ finalValue, inView }: { finalValue: number, inView: boolea
       const animateCount = (currentTime: number) => {
         if (canceled) return;
         const elapsed = currentTime - startTime;
-        let progress = Math.min(elapsed / duration, 1);
+        const progress = Math.min(elapsed / duration, 1);
         const easeOut = 1 - Math.pow(1 - progress, 3);
         setDisplayValue(Math.floor(finalValue * easeOut));
         if (progress < 1) requestAnimationFrame(animateCount);

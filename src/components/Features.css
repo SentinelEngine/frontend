@@ -1,13 +1,20 @@
 /* ─── STACKED FEATURES SECTION ─────────────────────────────── */
 
+.feat-scroll-region {
+  height: calc(100vh + 1250px);
+  position: relative;
+  z-index: 5;
+  background: var(--bg);
+}
+
 .feat-stack-section {
-  height: 150vh;
+  height: 100vh;
+  min-height: 680px;
+  width: 100%;
   position: relative;
   overflow: hidden;
   /* IMPORTANT: hides lower cards */
-  z-index: 5;
   background: var(--bg);
-  /* Use global base background */
 }
 
 .feat-stack-cards {
@@ -19,10 +26,11 @@
 .feat-card {
   position: absolute;
   left: 50%;
-  top: 120%;
+  top: 118%;
   /* Starting position below viewport */
   transform: translate(-50%, -50%);
   width: min(900px, 94vw);
+  max-height: min(620px, 82vh);
   /* Wider width to fit side-by-side content */
   border-radius: 20px;
   overflow: hidden;
@@ -40,6 +48,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100%;
+  min-height: 460px;
 }
 
 /* ─── CONTENT STYLES ───────────────────────────────────────── */
@@ -303,12 +312,22 @@
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  .feat-scroll-region {
+    height: calc(100vh + 1100px);
+  }
+
+  .feat-stack-section {
+    min-height: 760px;
+  }
+
   .feat-card {
     width: 94vw;
+    max-height: 86vh;
   }
 
   .feat-card-container {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .feat-card-copy {
