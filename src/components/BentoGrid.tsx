@@ -25,8 +25,9 @@ const BentoGrid: React.FC = () => {
         const mobileTl = gsap.timeline({
           scrollTrigger: {
             trigger: regionRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
+            start: "top 90%",
+            end: "bottom 25%",
+            toggleActions: "play reverse play reverse",
           }
         });
 
@@ -64,8 +65,9 @@ const BentoGrid: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: regionRef.current,
-          start: "top 72%",
-          toggleActions: "play none none reverse",
+          start: "top 96%",
+          end: "bottom 18%",
+          toggleActions: "play reverse play reverse",
           invalidateOnRefresh: true,
         }
       });
@@ -74,7 +76,7 @@ const BentoGrid: React.FC = () => {
       tl.to(headerRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.3,
       });
 
       // 2. Cards enter
@@ -84,7 +86,7 @@ const BentoGrid: React.FC = () => {
         scale: 1,
         opacity: 1,
         stagger: 0.1,
-        duration: 1.2,
+        duration: 1,
         ease: "power3.out",
       }, "-=0.3");
 
@@ -95,20 +97,14 @@ const BentoGrid: React.FC = () => {
           scaleY: 0,
           transformOrigin: "bottom",
           stagger: 0.05,
-          duration: 0.8,
+          duration: 0.6,
           ease: "back.out(1.7)",
         }, "-=0.6");
       }
 
-      // Crucial: Refresh on mount
-      ScrollTrigger.refresh();
-
     }, regionRef);
 
-    return () => {
-      ctx.revert();
-      ScrollTrigger.refresh();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -119,7 +115,7 @@ const BentoGrid: React.FC = () => {
             <div className="bento-label">Full coverage</div>
             <div className="bento-title">Everything your cloud stack touches</div>
           </div>
-          
+
           <div className="bento-grid">
             {/* Card 1: Wide & Tall */}
             <div className="bc wide tall card-hover" ref={el => { cardsRef.current[0] = el; }}>
@@ -129,20 +125,20 @@ const BentoGrid: React.FC = () => {
               <div className="bc-title">Cache = instant savings</div>
               <div className="bc-desc">Add one line of Redis caching and watch your LLM bill drop 60% in real time. The most powerful demo in the tool.</div>
               <div className="mini-graph">
-                {[40, 42, 38, 44, 20, 18, 19, 17].map((h, i) => (
+                {[190, 185, 178, 170, 130, 118, 91, 78].map((h, i) => (
                   <div
                     key={i}
                     className="bar"
                     style={{
                       height: `${h}px`,
-                      width: '14px',
+                      width: '20px',
                       background: i >= 4 ? 'var(--teal)' : '#E24B4A',
                       opacity: i >= 4 ? 0.8 : 0.7,
                     }}
                   />
                 ))}
               </div>
-              <div style={{ fontSize: '10px', color: 'var(--muted)', marginTop: '6px' }}>Before cache → After cache (60% drop)</div>
+              <div style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '12px', textAlign: 'start' }}>Before cache → After cache (60% drop)</div>
             </div>
 
             {/* Card 2: Live pricing */}
