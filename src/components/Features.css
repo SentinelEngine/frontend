@@ -1,0 +1,334 @@
+/* ─── STACKED FEATURES SECTION ─────────────────────────────── */
+
+.feat-scroll-region {
+  height: calc(100vh + 1250px);
+  position: relative;
+  z-index: 5;
+  background: var(--bg);
+}
+
+.feat-stack-section {
+  height: 100vh;
+  min-height: 680px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* IMPORTANT: hides lower cards */
+  background: var(--bg);
+}
+
+.feat-stack-cards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.feat-card {
+  position: absolute;
+  left: 50%;
+  top: 118%;
+  /* Starting position below viewport */
+  transform: translate(-50%, -50%);
+  width: min(900px, 94vw);
+  max-height: min(620px, 82vh);
+  /* Wider width to fit side-by-side content */
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg2);
+  /* Global darker container background */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.7),
+    0 0 0 1px var(--faint) inset;
+  border: 1px solid var(--border);
+}
+
+.feat-card:first-child {
+  top: 50%;
+  opacity: 0.9;
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+.feat-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  min-height: 460px;
+}
+
+/* ─── CONTENT STYLES ───────────────────────────────────────── */
+
+.feat-card-copy {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 0.5px solid var(--faint);
+}
+
+.feat-card-num {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.feat-card-h {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  color: var(--text);
+}
+
+.feat-card-p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.feat-card-link {
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.feat-card-link:hover {
+  opacity: 1;
+}
+
+.feat-card-visual {
+  background: rgba(255, 255, 255, 0.01);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+}
+
+/* ─── CODE ANNOTATION VISUAL ─────────────────────────────────── */
+
+.fc-visual-code {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-align: left;
+}
+
+.fc-ann-bar {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 14px;
+  font-size: 11px;
+  color: var(--muted);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.fc-ann-line {
+  display: flex;
+  align-items: center;
+  padding: 4px 14px;
+  line-height: 1.9;
+  gap: 8px;
+}
+
+.fc-ln {
+  color: var(--faint);
+  min-width: 20px;
+  font-size: 10px;
+}
+
+.fc-code {
+  color: #9fd9c0;
+  flex: 1;
+  font-size: 11.5px;
+}
+
+.fc-badge {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.cb-hi {
+  background: rgba(226, 75, 74, .14);
+  color: var(--red);
+  border: 0.5px solid rgba(226, 75, 74, .28);
+}
+
+.cb-lo {
+  background: rgba(29, 158, 117, .12);
+  color: var(--teal-bright);
+  border: 0.5px solid rgba(29, 158, 117, .28);
+}
+
+.cb-md {
+  background: rgba(245, 158, 11, .12);
+  color: var(--amber);
+  border: 0.5px solid rgba(245, 158, 11, .28);
+}
+
+.fc-codelens {
+  margin: 8px 14px;
+  padding: 8px 12px;
+  background: rgba(29, 158, 117, 0.07);
+  border-radius: 6px;
+  border: 0.5px solid var(--border);
+}
+
+/* ─── CHAIN VISUAL ─────────────────────────────────────────── */
+
+.fc-chain-vis {
+  width: 100%;
+  text-align: left;
+}
+
+.fc-chain-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.fc-chain-id {
+  font-size: 10px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fc-chain-hash {
+  font-family: inherit;
+  font-size: 10px;
+  word-break: break-all;
+  margin-bottom: 8px;
+}
+
+.fc-chain-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fc-chain-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.fc-chain-tag.ok {
+  background: rgba(29, 158, 117, 0.15);
+  color: var(--teal-bright);
+  border: 0.5px solid var(--border);
+}
+
+.fc-chain-tag.fail {
+  background: rgba(226, 75, 74, 0.12);
+  color: var(--red);
+  border: 0.5px solid rgba(226, 75, 74, 0.3);
+}
+
+.fc-chain-ts {
+  font-size: 10px;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+/* ─── PR VISUAL ─────────────────────────────────────────────── */
+
+.fc-pr-card {
+  background: var(--bg3);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--faint);
+  width: 100%;
+}
+
+.fc-pr-head {
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--faint);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fc-pr-num {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.fc-pr-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.fc-pr-rows {
+  padding: 10px 16px;
+}
+
+.fc-pr-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 0.5px solid var(--faint);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.fc-pr-row:last-child {
+  border-bottom: none;
+}
+
+.fc-pr-total {
+  padding: 12px 16px;
+  border-top: 0.5px solid var(--faint);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.fc-pr-anchor {
+  font-size: 10px;
+  color: var(--muted);
+  padding: 8px 16px;
+  border-top: 0.5px solid var(--faint);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.6;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .feat-scroll-region { height: calc(100vh + 1100px); }
+  .feat-stack-section { min-height: 760px; }
+  .feat-card { width: 94vw; max-height: 86vh; }
+  .feat-card-container { grid-template-columns: 1fr; min-height: auto; }
+  .feat-card-copy { padding: 1.8rem 1.25rem; border-right: none; border-bottom: 0.5px solid var(--faint); }
+  .feat-card-h { font-size: 24px; }
+  .feat-card-visual { padding: 1.25rem; }
+  .fc-visual-code { font-size: 10px; }
+  .fc-ann-line { padding: 4px 10px; }
+  .fc-code { font-size: 10px; }
+  .fc-chain-block { padding: 1rem; }
+  .fc-chain-hash { font-size: 9px; line-height: 1.4; }
+}
+
